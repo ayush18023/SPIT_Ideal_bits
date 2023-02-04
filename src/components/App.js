@@ -4,6 +4,7 @@ import { CssBaseline } from '@mui/material';
 import { Actors, MovieInformation, Profile, Movies, NavBar } from './index';
 import useStyles from './styles';
 import useAlan from './Alan';
+import Welcome from './Welcome';
 
 function App() {
   const classes = useStyles();
@@ -13,12 +14,13 @@ function App() {
 
     <div className={classes.root}>
       <CssBaseline />
-      <NavBar />
 
+      {/* <NavBar /> */}
       <main className={classes.content}>
         <div className={classes.toolbar}>
           <Routes>
-            <Route exact path="/" element={<Movies />} />
+            <Route exact path="/" element={<Welcome />} />
+            <Route exact path="/Home" element={<Movies />} />
             <Route exact path="/approved" element={<Movies />} />
 
             <Route exact path="/movie/:id" element={<MovieInformation />} />

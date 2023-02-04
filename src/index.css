@@ -79,3 +79,15 @@
     align-items: center;
     max-width: 450px;
 }
+
+@keyframes shine {
+    0% {left: -100px}
+    20% {left: 100%}
+    100% {left: 100%}
+}
+
+
+
+.makeStyles-root-1{
+    overflow: hidden;
+}

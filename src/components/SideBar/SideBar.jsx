@@ -38,7 +38,7 @@ function SideBar({ setMobileOpen }) {
 
       </Link>
       <Divider />
-      <List>
+      {/* <List>
         <ListSubheader>Categoires</ListSubheader>
         {
             categories.map(({ label, value }) => (
@@ -54,10 +54,10 @@ function SideBar({ setMobileOpen }) {
 
             ))
         }
-      </List>
+      </List> */}
       <Divider />
       <List>
-        <ListSubheader>Genres</ListSubheader>
+        <ListSubheader>Categoires</ListSubheader>
         {isFetching ? (
           <Box display="flex" justifyContent="center">
             <CircularProgress size="4rem" />
