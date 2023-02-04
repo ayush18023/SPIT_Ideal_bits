@@ -2,6 +2,7 @@ import React, { useState,useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import WAVES from "vanta/dist/vanta.waves.min"
 import * as THREE from "three";
+import { Link } from "react-router-dom";
 // import "../../index.css"
 
 function Welcome() {
@@ -36,18 +37,20 @@ function Welcome() {
                 zIndex:10,width:"350px"}}>
                 Stream untethered, watch on your own terms
             </h2>
-            <h3 className="butt" style={{
-                padding:"20px",
-                position:"absolute",
-                left:"45%",
-                top:"60%",
-                backgroundColor:"#dc1a28",
-                color:"white",
-                borderRadius:"10px",
-                zIndex:10
-            }}>
-                Get Started
-            </h3>
+            <Link to="/Home">
+                <h3 className="butt" style={{
+                    padding:"20px",
+                    position:"absolute",
+                    left:"45%",
+                    top:"60%",
+                    backgroundColor:"#dc1a28",
+                    color:"white",
+                    borderRadius:"10px",
+                    zIndex:10
+                }}>
+                    Get Started
+                </h3>
+            </Link>
         </div>
         <div ref={myRef} style={{width:"100vw",height:"100vh",position:"absolute",top:0,left:0,zIndex:0,overflow:"hidden"}}>
             {/* Foreground content goes here */}
