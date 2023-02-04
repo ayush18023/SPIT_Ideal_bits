@@ -5,6 +5,8 @@ import { Actors, MovieInformation, Profile, Movies, NavBar } from './index';
 import useStyles from './styles';
 import useAlan from './Alan';
 import Welcome from './Welcome';
+import All_Movies from './All_Comp/All_Movies';
+import SingleMovie from './MovieInformation/SingleMovie';
 
 function App() {
   const classes = useStyles();
@@ -23,7 +25,7 @@ function App() {
             <Route exact path="/Home" element={<Movies />} />
             <Route exact path="/approved" element={<Movies />} />
 
-            <Route exact path="/movie/:id" element={<MovieInformation />} />
+            <Route exact path="/movie/:id" element={<SingleMovie />} />
             <Route exact path="/actors/:id" element={<Actors />} />
 
             <Route exact path="/profile/:id" element={<Profile />} />

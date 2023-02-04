@@ -3,6 +3,63 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const tmdbApiKey = process.env.REACT_APP_TMDB_KEY;
 
 // https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1
+const data=[
+  {
+    id:1,
+    film_name:"Black Adam",
+    vote_average:4,
+    thumbnail:"https://upload.wikimedia.org/wikipedia/en/a/a9/Black_Adam_%28film%29_poster.jpg",
+    description:"asabsvjhabs",
+    location:"mumbai",
+    category:"Romance",
+    eth:1.04
+  },
+  {
+    id:2,
+    film_name:"ADI PURUSH",
+    vote_average:4,
+    thumbnail:"https://static-koimoi.akamaized.net/wp-content/new-galleries/2020/11/adipurush002.jpg",
+    description:"asjajhvkja",
+    location:"pune",
+    category:"action",
+    eth:1.26
+  },
+  {
+    id:3,
+    film_name:"ADI PURUSH",
+    vote_average:4,
+    thumbnail:"https://static-koimoi.akamaized.net/wp-content/new-galleries/2020/11/adipurush002.jpg",
+    description:"asjajhvkja",
+    location:"pune",
+    category:"action",
+    eth:1.26
+  },
+  {
+    id:4,
+    film_name:"ADI PURUSH",
+    vote_average:4,
+    thumbnail:"https://static-koimoi.akamaized.net/wp-content/new-galleries/2020/11/adipurush002.jpg",
+    description:"asjajhvkja",
+    location:"pune",
+    category:"action",
+    eth:1.26
+  },
+  {
+    id:5,
+    film_name:"ADI PURUSH",
+    vote_average:4,
+    thumbnail:"https://static-koimoi.akamaized.net/wp-content/new-galleries/2020/11/adipurush002.jpg",
+    description:"asjajhvkja",
+    location:"pune",
+    category:"action",
+    eth:1.26
+  }
+]
+
+export const fetchmovies=()=>{
+  return data
+}
+
 export const tmdbApi = createApi({
   reducerPath: 'tmdbApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3' }),

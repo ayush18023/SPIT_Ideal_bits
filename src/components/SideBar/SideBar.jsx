@@ -57,7 +57,7 @@ function SideBar({ setMobileOpen }) {
       </List> */}
       <Divider />
       <List>
-        <ListSubheader>Categoires</ListSubheader>
+        <ListSubheader>Categories</ListSubheader>
         {isFetching ? (
           <Box display="flex" justifyContent="center">
             <CircularProgress size="4rem" />

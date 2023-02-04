@@ -423,7 +423,6 @@ function NavBar() {
                   </div>
                   <input
                     type="file"
-                    className="hidden"
 
                     ref={videoRef}
                     accept="video/*"

@@ -91,3 +91,8 @@
 .makeStyles-root-1{
     overflow: hidden;
 }
+
+.gridforMovie{
+    display:flex;
+    flex-wrap: wrap;
+}
