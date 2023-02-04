@@ -15,7 +15,7 @@ async function main() {
 
   // We get the contract to deploy
   const OurTube = await hre.ethers.getContractFactory("OurTube");
-  const ourtube = await OurTube.deploy("Hello, OurTube!");
+  const ourtube = await OurTube.deploy();
 
   await ourtube.deployed();
 

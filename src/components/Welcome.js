@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 
 function Welcome() {
   let navigate = useNavigate();
-
+  const [UserWallet, setUserWallet] = useState(null);
   const [vantaEffect, setVantaEffect] = useState(null)
   const myRef = useRef(null)
+  const home =useRef(null)
+  // let navigate = useNavigate();
   useEffect(() => {
     if (!vantaEffect) {
       setVantaEffect(WAVES({
@@ -25,7 +27,54 @@ function Welcome() {
     return () => {
       if (vantaEffect) vantaEffect.destroy()
     }
-  }, [vantaEffect])
+  }, [vantaEffect]);
+
+  const checkedWallet = async () => {
+    console.log("Checking wallet");
+    try {
+      const { ethereum } = window;
+
+      if (!ethereum) {
+        alert("Get MetaMask!");
+        return;
+      }
+
+      // Change network to ropsten
+      await ethereum.enable();
+
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      await ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: `0x539` }],
+      });
+      console.log("Connected", accounts[0]);
+      localStorage.setItem("walletAddress", accounts[0]);
+
+      home.current.click()
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handlemeta=()=>{
+    checkedWallet();
+    // if (window.ethereum) {
+    //   window.ethereum.on("chainChanged", () => {
+    //     window.location.reload();
+    //   });
+    //   window.ethereum.on("accountsChanged", () => {
+    //     checkedWallet();
+    //   });
+    // }
+
+
+    // if(0){
+    //   home.current.click()
+    // }
+  }
 
   return(
     <div style={{overflow:"hidden"}}>
@@ -37,19 +86,24 @@ function Welcome() {
                 zIndex:10,width:"350px"}}>
                 Stream untethered, watch on your own terms
             </h2>
+            {/* <Link to="/Home"> */}
+              <h3 className="butt" style={{
+                  padding:"20px",
+                  position:"absolute",
+                  left:"45%",
+                  top:"60%",
+                  backgroundColor:"#dc1a28",
+                  color:"white",
+                  borderRadius:"10px",
+                  zIndex:10
+              }}
+              onClick={handlemeta}
+              > 
+                  Get Started
+              </h3>
+            {/* </Link> */}
             <Link to="/Home">
-                <h3 className="butt" style={{
-                    padding:"20px",
-                    position:"absolute",
-                    left:"45%",
-                    top:"60%",
-                    backgroundColor:"#dc1a28",
-                    color:"white",
-                    borderRadius:"10px",
-                    zIndex:10
-                }}>
-                    Get Started
-                </h3>
+                <div ref={home}></div>
             </Link>
         </div>
         <div ref={myRef} style={{width:"100vw",height:"100vh",position:"absolute",top:0,left:0,zIndex:0,overflow:"hidden"}}>
