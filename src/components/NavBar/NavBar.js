@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery, TextField, TextareaAutosize } from '@mui/material';
 import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 import { useTheme } from '@mui/styles';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, userSelector } from '../../features/auth';
 import { SideBar, Search } from '..';
@@ -265,7 +265,7 @@ function NavBar() {
             </div>
 
 
-            <Button color="inherit" onClick={()=naviagate('/profile/dashboard')>}>
+            <Button color="inherit" onClick={()=>navigate('/profile/dashboard')}>
             <div style={{width: "30px"}}>
             <Jazzicon address={address} />
             </div>&nbsp; Profile
