@@ -9,11 +9,11 @@ function MovieList({ movies, numberOfMovies }) {
 
   return (
     // <Grid container className={classes.moviesContainer}>
-    <div className='gridforMovie' style={{height:'calc(100vh - 52px)',width:'calc(100vw - 252px)',marginLeft:'252px'}}> 
+    <div className='gridforMovie' style={{ height: 'calc(100vh - 52px)', width: 'calc(100vw - 252px)', marginLeft: '252px', marginTop: '45px' }}>
       {movies.map((movie, i) => (
         <Movie key={i} movie={movie} i={i} />
       ))}
-    </div> 
+    </div>
     // </Grid>
   );
 }
