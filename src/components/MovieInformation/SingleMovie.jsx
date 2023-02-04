@@ -34,6 +34,18 @@ const SingleMovie = () => {
                     <p>{movie?.description}</p>
                     <h3>Category</h3>
                     <p>{movie?.category}</p>
+                    <div style={{
+                        backgroundColor:"#dc1a28",
+                        color:"white",
+                        width:"100px",
+                        borderRadius:"10px",
+                        padding:"10px",
+                        display:"flex",
+                        justifyContent:"center"
+                    }}>
+                        <img src={require("../../assets/genres/ethereum.png")} alt="" /> {movie?.eth}
+                         
+                    </div>
                 </div>
 
 

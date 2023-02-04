@@ -53,7 +53,7 @@ function Movies() {
   // if (error) return 'An error has occured';
   return (
     <>
-      {/* <FeaturedMovie movie={data.results[0]} /> */}
+      <FeaturedMovie movie={movies[0]} />
       <NavBar/>
       <div><MovieList movies={movies} numberOfMovies={numberOfMovies} /></div>
       {/* <Pagination currentPage={page} setPage={setPage} totalPages={data.total_pages} /> */}
