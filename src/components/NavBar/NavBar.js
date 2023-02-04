@@ -20,6 +20,18 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { BiCloud, BiMusic, BiPlus } from "react-icons/bi";
 
+// import React, { useState, useEffect, useRef } from "react";
+// import { Header } from "../components/Header";
+// import Sidebar from "../components/Sidebar";
+// import ContractAbi from "../artifacts/contracts/OurTube.sol/OurTube.json";
+import { ethers } from "ethers";
+import { create } from "ipfs-http-client";
+// import { BiCloud, BiMusic, BiPlus } from "react-icons/bi";
+import toast from "react-hot-toast";
+import getContract from "../../utils/getContract";
+import Toggle from "react-toggle";
+// import "react-toggle/style.css"; // for
+
 function NavBar() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -34,15 +46,144 @@ function NavBar() {
 
   // form
 
-  const [film_name, setfilm_name] = useState("")
-  const [description, setdescription] = useState("")
+  const [title, setTitle] = useState("")
+  const [location, setlocation] = useState("")
+  const [description, setDescription] = useState("")
   const [file, setfile] = useState("")
-  const [category, setcategory] = useState("Action")
+  const [category, setCategory] = useState("Action")
   const { data, isFetching } = useGetGenresQuery();
   const [thumbnail, setThumbnail] = useState("");
+  const [isAudio, setIsAudio] = useState(false);
   const thumbnailRef = useRef();
   const [video, setVideo] = useState("");
   const videoRef = useRef();
+
+  const authorization = "Basic " + btoa("2LGkI1wSpRlIh7z5tiKenMI8G2a:9cf31f50c1701b54894c88d401ec0d7c");
+
+  const client = create({
+    host: 'ipfs.infura.io',
+    port: 5001,
+    protocol: 'https',
+    headers: {
+      authorization: authorization,
+    }
+  });
+
+  const handleSubmit = async () => {
+    console.log(thumbnail);
+    if (
+      title === "" ||
+      description === "" ||
+      category === "" ||
+      location === "" ||
+      thumbnail === "" ||
+      video === ""
+    ) {
+      toast.error("Please fill all the fields", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      return;
+    }
+    uploadThumbnail(thumbnail);
+  };
+
+  const uploadThumbnail = async (thumbnail) => {
+    console.log("uploading thumbnail");
+    toast("Uploading thumbnail...", {
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
+
+    console.log("uploading thumbnail");
+    try {
+      console.log("Try chal rha");
+      const added = await client.add(thumbnail);
+      console.log("thumbnail");
+      uploadVideo(added.path);
+      console.log("Video Uploaded");
+      toast.success("Thumbnail uploaded successfully", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    } catch (error) {
+      console.log("Error uploading file: ", error);
+    }
+  };
+
+  const uploadVideo = async (thumbnail) => {
+    console.log("uploading video");
+    toast("Uploading video...", {
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
+
+    try {
+      const added = await client.add(video);
+      console.log({
+        uploadVIdeo: added.path,
+        thumbnail: thumbnail,
+      });
+      saveVideo(added.path, thumbnail);
+      toast.success("Video uploaded successfully", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    } catch (error) {
+      console.log("Error uploading file: ", error);
+    }
+  };
+
+  const saveVideo = async (video, thumbnail) => {
+    let data = {
+      title,
+      description,
+      category,
+      location,
+      thumbnail,
+      video,
+    };
+    console.log("Saving video", data);
+    let contract = await getContract();
+    let UploadedDate = String(new Date());
+
+    console.log("UploadedDate", UploadedDate);
+
+    // Show successfully alert
+
+    await contract.uploadVideo(
+      video,
+      title,
+      description,
+      location,
+      category,
+      thumbnail,
+      isAudio,
+      UploadedDate
+    );
+
+    window.history.back();
+  };
+
+  const goBack = () => {
+    window.history.back();
+  };
+
 
 
   const sessionIdFromLocalStorage = localStorage.getItem('session_id');
@@ -75,10 +216,10 @@ function NavBar() {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    height:"90vh",
-    overflow:"auto"
+    height: "90vh",
+    overflow: "auto"
   };
-  
+
   // const handlelogin=()=>{
 
   // }
@@ -88,35 +229,35 @@ function NavBar() {
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
           {
-        isMobile && (
-        <IconButton
-          color="inherit"
-          edge="start"
-          style={{ outlined: 'none' }}
-          onClick={() => setMobileOpen((prevState) => !prevState)}
-          className={classes.menuButton}
-        >
-          <Menu />
+            isMobile && (
+              <IconButton
+                color="inherit"
+                edge="start"
+                style={{ outlined: 'none' }}
+                onClick={() => setMobileOpen((prevState) => !prevState)}
+                className={classes.menuButton}
+              >
+                <Menu />
 
-        </IconButton>
-        )
-      }
+              </IconButton>
+            )
+          }
           <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
             {
-            theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />
-          }
+              theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />
+            }
           </IconButton>
           {!isMobile && <Search />}
-          <div style={{display:"flex"}}>
-            <div style={{display:"flex",alignItems:"center"}} className="UploadBtn"> 
+          <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", alignItems: "center" }} className="UploadBtn">
               <UploadIcon />
-              <p style={{marginRight:"30px",marginLeft:"10px"}} onClick={()=>setOpen(true)}>Upload Movie</p>
+              <p style={{ marginRight: "30px", marginLeft: "10px" }} onClick={() => setOpen(true)}>Upload Movie</p>
             </div>
 
 
             {!isAuthenticated ? (
               <Button color="inherit" onClick={fetchToken}>
-                <AccountCircle />&nbsp; Login  
+                <AccountCircle />&nbsp; Login
               </Button>
 
             ) : (
@@ -125,7 +266,7 @@ function NavBar() {
                 component={Link}
                 to={`/profile/${user.id}`}
                 className={classes.linkButton}
-                onClick={() => {}}
+                onClick={() => { }}
               >
                 {!isMobile && <>My Movies &nbsp; </>}
                 <Avatar
@@ -145,105 +286,103 @@ function NavBar() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <div style={{display:"flex",justifyContent:"space-between"}}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
 
-              <div style={{width:"40%"}}>
+                <div style={{ width: "40%" }}>
 
-                <h3>Film Name</h3>
-                <TextField
-                  id="outlined-basic" label="" variant="outlined"
-                  value={film_name}
-                  onChange={(e)=>setfilm_name(e.target.value)}
-                  placeholder="Enter film name"
-                  fullWidth
-                />  
-                <br />
+                  <h3>Film Name</h3>
+                  <TextField
+                    id="outlined-basic" label="" variant="outlined"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Enter film name"
+                    fullWidth
+                  />
+                  <br />
 
-                <h3>Description</h3>
-                <TextField
-                  id="outlined-multiline-static"
-                  // label="Multiline"
-                  placeholder='Add a Description'
-                  multiline
-                  rows={4}
-                  variant="outlined"
-                  // width="50%"
-                  fullWidth
-                />
-                <div style={{display:"flex",justifyContent:"space-between"}}>
-                    <div style={{width:"40%"}}>
-                      <h3>Category</h3>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={category}
-                        label="Age"
-                        onChange={(e)=>setcategory(e.target.value)}
-                        fullWidth
-                      >
-                        { data?.genres?.map((genre)=>(
-                          <MenuItem value={genre.name}>{genre.name}</MenuItem>
-                        ))}
-                      </Select>
-                      
-                    </div>
-                    <div style={{width:"40%"}}>
+                  <h3>Location</h3>
+                  <TextField
+                    id="outlined-basic" label="" variant="outlined"
+                    value={location}
+                    onChange={(e) => setlocation(e.target.value)}
+                    placeholder="Enter film name"
+                    fullWidth
+                  />
+                  <br />
+
+                  <h3>Description</h3>
+                  <TextField
+                    id="outlined-multiline-static"
+                    // label="Multiline"
+                    placeholder='Add a Description'
+                    multiline
+                    rows={4}
+                    value={description}
+                    variant="outlined"
+                    // width="50%"
+                    fullWidth
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+
+                    <div style={{ width: "40%" }}>
                       <h3>Genre</h3>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={category}
                         label="Age"
-                        onChange={(e)=>setcategory(e.target.value)}
+                        onChange={(e) => setCategory(e.target.value)}
                         fullWidth
                       >
-                        { data?.genres?.map((genre)=>(
+                        {data?.genres?.map((genre) => (
                           <MenuItem value={genre.name}>{genre.name}</MenuItem>
                         ))}
                       </Select>
 
                     </div>
+                  </div>
+
+
+                  <br />
+                  
+
+                  <input
+                    type="file"
+                    ref={thumbnailRef}
+                    onChange={(e) => {
+                      setThumbnail(e.target.files[0]);
+                    }}
+                    accept="image/*"
+                    style={{ visibility: "hidden" }}
+                  />
                 </div>
-
-
-                <br />
-                <h3>Add Thumbnail</h3>
-                {/* <input type="file" name="" onChange={e=>setfile(e.target.files[0])} /> */}
-                <div
-                  onClick={() => {
-                    thumbnailRef.current.click();
-                  }}
-                  className=""
-                >
-                  {thumbnail ? (
-                    <img
+                <div style={{ width: "50%" }}>
+                  <h3>Add Thumbnail</h3>
+                    {/* <input type="file" name="" onChange={e=>setfile(e.target.files[0])} /> */}
+                    <div
                       onClick={() => {
                         thumbnailRef.current.click();
                       }}
-                      src={URL.createObjectURL(thumbnail)}
-                      alt="thumbnail"
-                      className="thumbprev"
-                    />
-                  ) : (
-                    <div className='uploadicon'>
+                      className=""
+                    >
+                      {thumbnail ? (
+                        <img
+                          onClick={() => {
+                            thumbnailRef.current.click();
+                          }}
+                          src={URL.createObjectURL(thumbnail)}
+                          alt="thumbnail"
+                          className="thumbprev"
+                        />
+                      ) : (
+                        <div className='uploadicon'>
 
-                      <BiPlus size={40} color="gray" />
+                          <BiPlus size={40} color="gray" />
+                        </div>
+
+                      )}
                     </div>
-
-                  )}
-                </div>
-
-                <input
-                  type="file"
-                  ref={thumbnailRef}
-                  onChange={(e) => {
-                    setThumbnail(e.target.files[0]);
-                  }}
-                  accept="image/*"
-                  style={{visibility:"hidden"}}
-                />
-              </div>
-                <div style={{width:"50%"}}>
                   <h3>Upload Video</h3>
                   <div
                     onClick={() => {
@@ -285,19 +424,23 @@ function NavBar() {
                   <input
                     type="file"
                     className="hidden"
-                    
+
                     ref={videoRef}
                     accept="video/*"
                     onChange={(e) => {
                       setVideo(e.target.files[0]);
                       console.log(e.target.files[0]);
                     }}
-                    style={{visibility:"hidden"}}
+                    style={{ visibility: "hidden" }}
                   />
 
-                  <div style={{textAlign:"center",backgroundColor:"#dc1a28",color:"white",maxWidth:"300px",padding:"10px"}}>
+                  <div style={{ textAlign: "center", backgroundColor: "#dc1a28", color: "white", maxWidth: "300px", padding: "10px" }} onClick={() => {
+                    handleSubmit();
+                  }}
+                  >
                     Upload
                   </div>
+
                 </div>
               </div>
             </Box>
