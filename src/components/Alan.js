@@ -3,7 +3,7 @@ import alanBtn from '@alan-ai/alan-sdk-web';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ColorModeContext } from '../utils/ToggleColor';
-import { fetchToken } from '../utils/index.js';
+// import { fetchToken } from '../utils/index.js';
 import { selectGenreOrCategory, searchMovie } from '../features/currentCategoriesOrGenre';
 
 const useAlan = () => {
@@ -35,7 +35,7 @@ const useAlan = () => {
             setMode('dark');
           }
         } else if (command === 'login') {
-          fetchToken();
+          // fetchToken();
         } else if (command === 'logout') {
           localStorage.clear();
           window.location.href = '/';

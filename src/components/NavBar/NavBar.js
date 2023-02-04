@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, userSelector } from '../../features/auth';
 import { SideBar, Search } from '..';
-import { fetchToken, createSessionId, movieApi } from '../../utils/index';
+import {  createSessionId, movieApi } from '../../utils/index';
 import useStyles from './styles';
 import { ColorModeContext } from '../../utils/ToggleColor';
 import UploadIcon from '@mui/icons-material/Upload';
@@ -19,6 +19,12 @@ import MenuItem from '@mui/material/MenuItem';
 // import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { BiCloud, BiMusic, BiPlus } from "react-icons/bi";
+// import jazzicon from "@metamask/jazzicon";
+import { Jazzicon } from "@ukstv/jazzicon-react";
+import ContractAbi from "../../artifacts/contracts/OurTube.sol/OurTube.json";
+// import { ethers } from "ethers";
+
+
 
 // import React, { useState, useEffect, useRef } from "react";
 // import { Header } from "../components/Header";
@@ -30,6 +36,9 @@ import { create } from "ipfs-http-client";
 import toast from "react-hot-toast";
 import getContract from "../../utils/getContract";
 import Toggle from "react-toggle";
+import { useWeb3React } from "@web3-react/core"
+
+
 // import "react-toggle/style.css"; // for
 
 function NavBar() {
@@ -42,7 +51,7 @@ function NavBar() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  let navigate = useNavigate();
 
   // form
 
@@ -57,9 +66,11 @@ function NavBar() {
   const thumbnailRef = useRef();
   const [video, setVideo] = useState("");
   const videoRef = useRef();
+  const { account, active } = useWeb3React()
+  
 
   const authorization = "Basic " + btoa("2LGkI1wSpRlIh7z5tiKenMI8G2a:9cf31f50c1701b54894c88d401ec0d7c");
-
+  const avatarRef = useRef()
   const client = create({
     host: 'ipfs.infura.io',
     port: 5001,
@@ -187,24 +198,23 @@ function NavBar() {
 
 
   const sessionIdFromLocalStorage = localStorage.getItem('session_id');
-  const { isAuthenticated, user } = useSelector(userSelector);
-
+  // const { isAuthenticated, user } = useSelector(userSelector);
+  let address = localStorage.getItem("walletAddress");
+  // console.log(address);
   const [mobileOpen, setMobileOpen] = useState(false);
-  useEffect(() => {
-    const logInUser = async () => {
-      if (token) {
-        if (sessionIdFromLocalStorage) {
-          const { data: userData } = await movieApi.get(`/account?session_id=${sessionIdFromLocalStorage}`);
-          dispatch(setUser(userData));
-        } else {
-          const sessionId = await createSessionId();
-          const { data: userData } = await movieApi.get(`/account?session_id=${sessionId}`);
-          dispatch(setUser(userData));
-        }
-      }
-    };
-    logInUser();
-  }, [token]);
+  // useEffect(() => {
+  //   // console.log(account);
+  //   // const element = avatarRef.current;
+  //   if (element && account) {
+  //       const addr = account.slice(2, 10);
+  //       const seed = parseInt(addr, 16);
+  //       const icon = jazzicon(20, seed); //generates a size 20 icon
+  //       if (element.firstChild) {
+  //           element.removeChild(element.firstChild);
+  //       }
+  //       element.appendChild(icon);
+  //   }
+  // }, [account, avatarRef]);
 
   const style = {
     position: 'absolute',
@@ -255,28 +265,11 @@ function NavBar() {
             </div>
 
 
-            {!isAuthenticated ? (
-              <Button color="inherit" onClick={fetchToken}>
-                <AccountCircle />&nbsp; Login
+            <Button color="inherit" onClick={()=naviagate('/profile/dashboard')>}>
+            <div style={{width: "30px"}}>
+            <Jazzicon address={address} />
+            </div>&nbsp; Profile
               </Button>
-
-            ) : (
-              <Button
-                color="inherit"
-                component={Link}
-                to={`/profile/${user.id}`}
-                className={classes.linkButton}
-                onClick={() => { }}
-              >
-                {!isMobile && <>My Movies &nbsp; </>}
-                <Avatar
-                  style={{ width: 30, height: 30 }}
-                  alt="Profile"
-                  src={`https://www.themoviedb.org/t/p/w64_and_h64_face${user?.avatar?.tmdb?.avatar?.avatar_path}`}
-                />
-              </Button>
-
-            )}
           </div>
 
           <Modal
@@ -345,7 +338,7 @@ function NavBar() {
 
 
                   <br />
-                  
+
 
                   <input
                     type="file"
@@ -359,30 +352,30 @@ function NavBar() {
                 </div>
                 <div style={{ width: "50%" }}>
                   <h3>Add Thumbnail</h3>
-                    {/* <input type="file" name="" onChange={e=>setfile(e.target.files[0])} /> */}
-                    <div
-                      onClick={() => {
-                        thumbnailRef.current.click();
-                      }}
-                      className=""
-                    >
-                      {thumbnail ? (
-                        <img
-                          onClick={() => {
-                            thumbnailRef.current.click();
-                          }}
-                          src={URL.createObjectURL(thumbnail)}
-                          alt="thumbnail"
-                          className="thumbprev"
-                        />
-                      ) : (
-                        <div className='uploadicon'>
+                  {/* <input type="file" name="" onChange={e=>setfile(e.target.files[0])} /> */}
+                  <div
+                    onClick={() => {
+                      thumbnailRef.current.click();
+                    }}
+                    className=""
+                  >
+                    {thumbnail ? (
+                      <img
+                        onClick={() => {
+                          thumbnailRef.current.click();
+                        }}
+                        src={URL.createObjectURL(thumbnail)}
+                        alt="thumbnail"
+                        className="thumbprev"
+                      />
+                    ) : (
+                      <div className='uploadicon'>
 
-                          <BiPlus size={40} color="gray" />
-                        </div>
+                        <BiPlus size={40} color="gray" />
+                      </div>
 
-                      )}
-                    </div>
+                    )}
+                  </div>
                   <h3>Upload Video</h3>
                   <div
                     onClick={() => {

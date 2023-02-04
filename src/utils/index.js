@@ -7,20 +7,20 @@ export const movieApi = axios.create({
   },
 });
 
-export const fetchToken = async () => {
-  try {
-    const { data } = await movieApi.get('/authentication/token/new');
+// export const fetchToken = async () => {
+//   try {
+//     const { data } = await movieApi.get('/authentication/token/new');
 
-    const token = data.request_token;
+//     const token = data.request_token;
 
-    if (data.success) {
-      localStorage.setItem('request_token', token);
-      window.location.href = `https://www.themoviedb.org/authenticate/${token}?redirect_to=${window.location.origin}`;
-    }
-  } catch (error) {
-    console.log('Sorry token your cannot be created');
-  }
-};
+//     if (data.success) {
+//       localStorage.setItem('request_token', token);
+//       window.location.href = `https://www.themoviedb.org/authenticate/${token}?redirect_to=${window.location.origin}`;
+//     }
+//   } catch (error) {
+//     console.log('Sorry token your cannot be created');
+//   }
+// };
 
 // eslint-disable-next-line consistent-return
 export const createSessionId = async () => {
