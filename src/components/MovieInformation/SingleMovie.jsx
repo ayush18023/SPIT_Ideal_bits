@@ -5,17 +5,18 @@ import { fetchmovies } from '../../services/TMDB'
 import NavBar from '../NavBar/NavBar';
 import { Rating } from '@mui/material';
 import useStyles from './styles';
+import { useSelector } from 'react-redux';
 
 const SingleMovie = () => {
     const classes = useStyles();
     const [movie, setmovie] = useState(null)
 
     const { id } = useParams()
+    const { movies } = useSelector(state=>state.movie)
 
     useEffect(()=>{
-        const x = fetchmovies()
-        console.log(x)
-        setmovie(x.find(x=>x.id==id))
+    
+        setmovie(movies.find(x=>x.id==id))
     },[])
 
     return (

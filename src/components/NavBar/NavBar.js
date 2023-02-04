@@ -37,6 +37,7 @@ import toast from "react-hot-toast";
 import getContract from "../../utils/getContract";
 import Toggle from "react-toggle";
 import { useWeb3React } from "@web3-react/core"
+import { addMovie } from '../../app/MovieReducer';
 
 
 // import "react-toggle/style.css"; // for
@@ -69,6 +70,8 @@ function NavBar() {
   const { account, active } = useWeb3React()
   
 
+  const { movies } = useSelector(state=>state.movie)
+
   const authorization = "Basic " + btoa("2LGkI1wSpRlIh7z5tiKenMI8G2a:9cf31f50c1701b54894c88d401ec0d7c");
   const avatarRef = useRef()
   const client = create({
@@ -99,6 +102,21 @@ function NavBar() {
       });
       return;
     }
+    const obj={
+      id:movies.length+1,
+      film_name:title,
+      location,
+      description,
+      category,
+      thumbnail:URL.createObjectURL(thumbnail),
+      video:URL.createObjectURL(video)
+    
+    }
+    console.log("here:",obj)
+
+    dispatch(addMovie(obj))
+    console.log("Redux",movies)
+
     uploadThumbnail(thumbnail);
   };
 
@@ -147,6 +165,8 @@ function NavBar() {
         uploadVIdeo: added.path,
         thumbnail: thumbnail,
       });
+      
+
       saveVideo(added.path, thumbnail);
       toast.success("Video uploaded successfully", {
         style: {
@@ -187,6 +207,8 @@ function NavBar() {
       isAudio,
       UploadedDate
     );
+
+    
 
     window.history.back();
   };

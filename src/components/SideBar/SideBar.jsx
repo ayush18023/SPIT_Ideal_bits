@@ -67,7 +67,7 @@ function SideBar({ setMobileOpen }) {
         )
           : (
             data.genres.map(({ name, id }) => (
-              <Link key={name} className={classes.link} to="/">
+              <Link key={name} className={classes.link} to="/Home">
                 <ListItem onClick={() => { dispatch(selectGenreOrCategory(id)); }} button>
                   <ListItemIcon>
                     <img src={genreIcons[name.toLowerCase()]} className={classes.genreImage} height={30} />
