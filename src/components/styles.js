@@ -12,7 +12,7 @@ export default makeStyles((theme) => ({
   content: {
     marginTop: '30px',
     flexGrow: '1',
-    padding: '2em',
+    // padding: '2em',
     width: '100%',
     [theme.breakpoints.down('md')]: {
       width: '0px',

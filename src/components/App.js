@@ -7,13 +7,13 @@ import useAlan from './Alan';
 import Welcome from './Welcome';
 import All_Movies from './All_Comp/All_Movies';
 import SingleMovie from './MovieInformation/SingleMovie';
+import Dashboard from './ProfileDash/Dashboard';
 
 function App() {
   const classes = useStyles();
   const alanBtnContainer = useRef();
   useAlan();
   return (
-
     <div className={classes.root}>
       <CssBaseline />
 
@@ -29,7 +29,7 @@ function App() {
             <Route exact path="/actors/:id" element={<Actors />} />
 
             <Route exact path="/profile/:id" element={<Profile />} />
-
+            <Route exact path="/profile/dashboard" element={<Dashboard />}></Route>
           </Routes>
 
         </div>
