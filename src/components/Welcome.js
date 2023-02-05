@@ -85,15 +85,15 @@ function Welcome() {
             zIndex: 10, width: "350px"
           }} /> */}
         <h1 style={{
-            position: "absolute", top: "10%", left: "37%",
-            zIndex: 10, width: "350px"
-            ,fontSize:"80px",color: "#dc1a28"
-          }}>
+          position: "absolute", top: "10%", left: "37%",
+          zIndex: 10, width: "350px"
+          , fontSize: "80px", color: "#dc1a28"
+        }}>
           StreamOn
         </h1>
         <h2 style={{
           position: "absolute", top: "40%", left: "37%", textAlign: "center",
-          zIndex: 10, width: "350px"
+          zIndex: 10, width: "350px", fontSize: '25px'
         }}>
           Stream untethered, watch on your own terms
         </h2>
