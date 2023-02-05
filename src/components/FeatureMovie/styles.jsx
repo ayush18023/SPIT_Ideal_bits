@@ -25,6 +25,7 @@ export default makeStyles((theme) => ({
     width: '100%',
     backgroundColor: 'rgba(0,0,0,0.575)',
     backgroundBlendMode: 'darken',
+    objectFit:'contain'
   },
   cardContent: {
     color: '#fff',
