@@ -58,7 +58,7 @@ function Movies() {
     <>
       {/* <FeaturedMovie movie={movies[0]} /> */}
       <img src={banner} alt="" style={{width:"100vw",opacity:0.5,filter:"brightness(75%)"}} />
-      <h2 style={{position:"relative",left:"500px",top:"-200px"}}>YOUR MOVIES.{"\n"} WHEN AND WHERE YOU WANT IT</h2>
+      <h2 style={{position:"relative",left:"600px",top:"-200px"}}>YOU <span style={{color:'red'}}>CREATE</span> IT {"\n"} WE <span span style={{color:'red'}}>STREAM</span> IT</h2>
       <NavBar/>
       <div><MovieList movies={movies} numberOfMovies={numberOfMovies} /></div>
       {/* <Pagination currentPage={page} setPage={setPage} totalPages={data.total_pages} /> */}
