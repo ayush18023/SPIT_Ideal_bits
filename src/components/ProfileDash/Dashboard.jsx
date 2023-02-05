@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import BasicTabs from './Tabs';
 import { Link } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
+import { Jazzicon } from '@ukstv/jazzicon-react';
 const Banner = styled(Box)(({ theme }) => ({
     paddingBottom: '15%',
     position: 'relative',
@@ -27,7 +28,8 @@ const InnerBox = styled(Box)(({ theme }) => ({
 
 }))
 function Dashboard() {
-
+    let address = localStorage.getItem("walletAddress");
+    // console.log(address);
     // const re = useRef(null)
     const clickHandler = () => {
         // re.current.click()
@@ -46,10 +48,10 @@ function Dashboard() {
                 </Box>
                 <Box style={{ margin: '0px auto', padding: '0px 50px', maxWidth: '1500px' }}>
                     <OuterBox>
-                        <InnerBox style={{ display: 'flex', cursor: 'pointer' }} className='input-icon' onClick={clickHandler}>
-                            <input type='file' style={{ margin: 'auto', display: 'none' }} ></input>
+                        <Jazzicon address={address} style={{ display: 'flex', cursor: 'pointer',border:'1px solid' }} className='input-icon' onClick={clickHandler}>
+                            {/* <input type='file' style={{ margin: 'auto', display: 'none' }} ></input> */}
                             <EditIcon style={{ display: 'inline', margin: 'auto', fontSize: '2rem', position: 'relative', zIndex: '1', color: 'white' }}></EditIcon>
-                        </InnerBox>
+                        </Jazzicon>
                     </OuterBox>
                     <Box style={{ display: 'block', position: 'relative', top: '-33px' }}>
                         <Box>
