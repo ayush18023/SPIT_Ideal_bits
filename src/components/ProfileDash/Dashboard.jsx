@@ -7,6 +7,7 @@ import BasicTabs from './Tabs';
 import { Link } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 import { Jazzicon } from '@ukstv/jazzicon-react';
+import ethereum from '../../assets/genres/ethereum.png'
 const Banner = styled(Box)(({ theme }) => ({
     paddingBottom: '15%',
     position: 'relative',
@@ -47,16 +48,19 @@ function Dashboard() {
                     {show && <EditIcon style={{ display: 'inline', margin: 'auto', fontSize: '2rem', position: 'relative', zIndex: '1', color: 'white' }}></EditIcon>}
                 </Box>
                 <Box style={{ margin: '0px auto', padding: '0px 50px', maxWidth: '1500px' }}>
-                    <OuterBox>
+                    <div style={{ width: "180px", height: '180px', marginBottom: '-75px', position: 'relative', top: '-120px' }}>
+                        <Jazzicon address={address} />
+                    </div>
+                    {/* <OuterBox>
                         <Jazzicon address={address} style={{ display: 'flex', cursor: 'pointer',border:'1px solid' }} className='input-icon' onClick={clickHandler}>
                             {/* <input type='file' style={{ margin: 'auto', display: 'none' }} ></input> */}
-                            <EditIcon style={{ display: 'inline', margin: 'auto', fontSize: '2rem', position: 'relative', zIndex: '1', color: 'white' }}></EditIcon>
+                    {/* <EditIcon style={{ display: 'inline', margin: 'auto', fontSize: '2rem', position: 'relative', zIndex: '1', color: 'white' }}></EditIcon>
                         </Jazzicon>
-                    </OuterBox>
-                    <Box style={{ display: 'block', position: 'relative', top: '-33px' }}>
+                    </OuterBox> */}
+                    <Box style={{ display: 'block', position: 'relative', top: '-33px', padding: '0px 22px' }}>
                         <Box>
-                            <Typography style={{ fontWeight: '600', fontSize: '30px', letterSpacing: '0px', color: 'white', fontFamily: 'Poppins,sans-serif' }}>userName</Typography>
-                            <Typography style={{ color: 'white', fontWeight: '300' }}>ethereum id</Typography>
+                            <Typography style={{ fontWeight: '600', fontSize: '30px', letterSpacing: '0px', color: 'white', fontFamily: 'Poppins,sans-serif' }}>Hi, Account</Typography>
+                            <Typography style={{ color: 'white', fontWeight: '300' }}><img src={ethereum}></img>0x87D....e63f</Typography>
                         </Box>
                         <Box style={{ marginTop: '10px' }}>
                             <BasicTabs />
