@@ -19,10 +19,25 @@ const movieSlice = createSlice({
       console.log(action.payload)
       state.genre = action.payload
       console.log(state.genre)
+    },
+    viewableMovie: (state, action) => {
+      state.movies.forEach((element, index) => {
+        if (element.id == action.payload) {
+          state.movies[index]["viewable"] = 1;
+        }
+      });
+    },
+    unviewableMovie: (state, action) => {
+      state.movies.forEach((element, index) => {
+        if (element.id == action.payload) {
+          state.movies[index]["viewable"] = 0;
+        }
+      });
     }
+
   },
 
 });
-export const { addMovie, addCategory } = movieSlice.actions;
+export const { addMovie, viewableMovie, unviewableMovie, addCategory } = movieSlice.actions;
 export default movieSlice.reducer;
 export const userSelector = (state) => state.user;

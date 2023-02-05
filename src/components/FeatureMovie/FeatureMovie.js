@@ -14,15 +14,15 @@ function FeaturedMovie({ movie }) {
       <Card className={classes.card} classes={{ root: classes.cardRoot }}>
         <CardMedia
           media="picture"
-          alt={movie.title}
-          image={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
-          title={movie.title}
+          alt={movie.film_name}
+          image={movie.thumbnail}
+          title={movie.film_name}
           className={classes.cardMedia}
         />
         <Box padding="20px">
           <CardContent className={classes.cardContent} classes={{ root: classes.cardContentRoot }}>
-            <Typography variant="h5" gutterBottom>{movie.title}</Typography>
-            <Typography variant="body2">{movie.overview}</Typography>
+            <Typography variant="h5" gutterBottom>{movie.film_name}</Typography>
+            <Typography variant="body2">{movie.description}</Typography>
           </CardContent>
         </Box>
       </Card>
