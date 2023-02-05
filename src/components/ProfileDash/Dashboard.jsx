@@ -47,12 +47,15 @@ function Dashboard() {
                     {show && <EditIcon style={{ display: 'inline', margin: 'auto', fontSize: '2rem', position: 'relative', zIndex: '1', color: 'white' }}></EditIcon>}
                 </Box>
                 <Box style={{ margin: '0px auto', padding: '0px 50px', maxWidth: '1500px' }}>
-                    <OuterBox>
+                <div style={{width: "20px"}}>
+                    <Jazzicon address={address} />
+                </div>
+                    {/* <OuterBox>
                         <Jazzicon address={address} style={{ display: 'flex', cursor: 'pointer',border:'1px solid' }} className='input-icon' onClick={clickHandler}>
                             {/* <input type='file' style={{ margin: 'auto', display: 'none' }} ></input> */}
-                            <EditIcon style={{ display: 'inline', margin: 'auto', fontSize: '2rem', position: 'relative', zIndex: '1', color: 'white' }}></EditIcon>
+                            {/* <EditIcon style={{ display: 'inline', margin: 'auto', fontSize: '2rem', position: 'relative', zIndex: '1', color: 'white' }}></EditIcon>
                         </Jazzicon>
-                    </OuterBox>
+                    </OuterBox> */} 
                     <Box style={{ display: 'block', position: 'relative', top: '-33px' }}>
                         <Box>
                             <Typography style={{ fontWeight: '600', fontSize: '30px', letterSpacing: '0px', color: 'white', fontFamily: 'Poppins,sans-serif' }}>userName</Typography>
