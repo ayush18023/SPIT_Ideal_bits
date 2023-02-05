@@ -15,8 +15,23 @@ const movieSlice = createSlice({
         state.movies.push(action.payload);
         console.log("aascas",state.movies)
     },
+    viewableMovie:(state,action)=>{
+      state.movies.forEach((element, index) => {
+        if(element.id == action.payload) {
+            state.movies[index]["viewable"] = 1;
+        }
+      });
+    },
+    unviewableMovie:(state,action)=>{
+      state.movies.forEach((element, index) => {
+        if(element.id == action.payload) {
+            state.movies[index]["viewable"] = 0;
+        }
+      });
+    }
+
   },
 });
-export const { addMovie } = movieSlice.actions;
+export const { addMovie , viewableMovie , unviewableMovie} = movieSlice.actions;
 export default movieSlice.reducer;
 export const userSelector = (state) => state.user;

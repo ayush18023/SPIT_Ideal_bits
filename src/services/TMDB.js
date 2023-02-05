@@ -12,7 +12,8 @@ const data=[
     description:"asabsvjhabs",
     location:"mumbai",
     category:"Romance",
-    eth:1.04
+    eth:1.04,
+    viewable:1
   },
   {
     id:2,
@@ -22,7 +23,8 @@ const data=[
     description:"asjajhvkja",
     location:"pune",
     category:"action",
-    eth:1.26
+    eth:1.26,
+    viewable:0
   },
   {
     id:3,
@@ -32,7 +34,8 @@ const data=[
     description:"asjajhvkja",
     location:"pune",
     category:"action",
-    eth:1.26
+    eth:1.26,
+    viewable:0
   },
   {
     id:4,
@@ -42,7 +45,8 @@ const data=[
     description:"asjajhvkja",
     location:"pune",
     category:"action",
-    eth:1.26
+    eth:1.26,
+    viewable:0
   },
   {
     id:5,
@@ -52,7 +56,8 @@ const data=[
     description:"asjajhvkja",
     location:"pune",
     category:"action",
-    eth:1.26
+    eth:1.26,
+    viewable:0
   }
 ]
 

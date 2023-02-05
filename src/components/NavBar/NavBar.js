@@ -68,7 +68,7 @@ function NavBar() {
   const [video, setVideo] = useState("");
   const videoRef = useRef();
   const { account, active } = useWeb3React()
-  
+  const [price, setprice] = useState(0)
 
   const { movies } = useSelector(state=>state.movie)
 
@@ -107,6 +107,7 @@ function NavBar() {
       film_name:title,
       location,
       description,
+      eth:price,
       category,
       thumbnail:URL.createObjectURL(thumbnail),
       video:URL.createObjectURL(video)
@@ -275,15 +276,13 @@ function NavBar() {
             )
           }
           <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
-            {
-              theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />
-            }
+            
           </IconButton>
           {!isMobile && <Search />}
           <div style={{ display: "flex" }}>
-            <div style={{ display: "flex", alignItems: "center" }} className="UploadBtn">
+            <div style={{ display: "flex", alignItems: "center" }} className="UploadBtn" onClick={() => setOpen(true)}>
               <UploadIcon />
-              <p style={{ marginRight: "30px", marginLeft: "10px" }} onClick={() => setOpen(true)}>Upload Movie</p>
+              <p style={{ marginRight: "30px", marginLeft: "10px" }} >Upload Movie</p>
             </div>
 
 
@@ -341,7 +340,7 @@ function NavBar() {
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
 
                     <div style={{ width: "40%" }}>
-                      <h3>Genre</h3>
+                      <h3>Category</h3>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -355,6 +354,18 @@ function NavBar() {
                         ))}
                       </Select>
 
+                       
+
+                    </div>
+                    <div style={{ width: "40%" }}>
+                      <h3>Price (in Eth)</h3>
+                      <TextField
+                        id="outlined-basic" label="" variant="outlined"
+                        value={price}
+                        onChange={(e) => setprice(e.target.value)}
+                        placeholder="Enter film name"
+                        fullWidth
+                      /> 
                     </div>
                   </div>
 
