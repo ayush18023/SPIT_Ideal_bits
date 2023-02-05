@@ -275,9 +275,12 @@ function NavBar() {
               </IconButton>
             )
           }
-          <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
+          {/* <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
 
-          </IconButton>
+          </IconButton> */}
+          <div>
+            
+          </div>
           {!isMobile && <Search />}
           <div style={{ display: "flex" }}>
             <div style={{ display: "flex", alignItems: "center" }} className="UploadBtn" onClick={() => setOpen(true)}>

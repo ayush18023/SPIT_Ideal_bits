@@ -84,7 +84,7 @@ const SingleMovie = () => {
                     <img className={classes.poster} src={movie?.thumbnail} alt="" />
 
                 </div>
-                <div style={{ marginLeft: "150px" }}>
+                <div style={{ marginLeft: "150px" , maxWidth:"50%"}}>
                     <h1>{movie?.film_name}</h1>
                     <p>{movie?.description}</p>
                     <Rating readOnly value={movie?.vote_average / 2} precision={0.1} />

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchmovies, useGetMoviesQuery } from '../../services/TMDB';
 import { MovieList, Pagination, FeaturedMovie, NavBar } from '..';
 import { addMovie } from '../../app/MovieReducer';
+import banner from '../../assets/images/banner.jpeg'
 
 function Movies() {
   const [page, setPage] = useState(1);
@@ -55,7 +56,9 @@ function Movies() {
   // if (error) return 'An error has occured';
   return (
     <>
-      <FeaturedMovie movie={movies[0]} />
+      {/* <FeaturedMovie movie={movies[0]} /> */}
+      <img src={banner} alt="" style={{width:"100vw",opacity:0.5,filter:"brightness(75%)"}} />
+      <h2 style={{position:"relative",left:"500px",top:"-200px"}}>YOUR MOVIES.{"\n"} WHEN AND WHERE YOU WANT IT</h2>
       <NavBar/>
       <div><MovieList movies={movies} numberOfMovies={numberOfMovies} /></div>
       {/* <Pagination currentPage={page} setPage={setPage} totalPages={data.total_pages} /> */}

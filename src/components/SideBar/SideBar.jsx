@@ -31,11 +31,18 @@ function SideBar({ setMobileOpen }) {
   return (
     <>
       <Link to="/" className={classes.imageLink}>
-        <img
+        {/* <img
           className={classes.image}
           src={theme.palette.mode === 'light' ? redLogo : blueLogo}
           alt="Filmpire logo"
-        />
+        /> */}
+        <h1 style={{
+          
+          zIndex: 10
+          , fontSize: "40px", color: "#dc1a28",paddingLeft:"30px",paddingRight:"30px",marginTop:"-10px",marginBottom:"-10px"
+        }}>
+          StreamOn
+        </h1>
 
       </Link>
       <Divider />
