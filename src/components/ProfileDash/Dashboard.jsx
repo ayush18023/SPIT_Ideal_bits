@@ -28,9 +28,10 @@ const InnerBox = styled(Box)(({ theme }) => ({
 }))
 function Dashboard() {
 
-    const re = useRef(null)
+    // const re = useRef(null)
     const clickHandler = () => {
-        re.current.click()
+        // re.current.click()
+        console.log('clicked');
     }
     const [show, setShow] = useState(false)
     return (
@@ -46,7 +47,7 @@ function Dashboard() {
                 <Box style={{ margin: '0px auto', padding: '0px 50px', maxWidth: '1500px' }}>
                     <OuterBox>
                         <InnerBox style={{ display: 'flex', cursor: 'pointer' }} className='input-icon' onClick={clickHandler}>
-                            <input type='file' style={{ margin: 'auto', display: 'none' }} ref={re}></input>
+                            <input type='file' style={{ margin: 'auto', display: 'none' }} ></input>
                             <EditIcon style={{ display: 'inline', margin: 'auto', fontSize: '2rem', position: 'relative', zIndex: '1', color: 'white' }}></EditIcon>
                         </InnerBox>
                     </OuterBox>
