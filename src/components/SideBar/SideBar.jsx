@@ -7,6 +7,7 @@ import { selectGenreOrCategory } from '../../features/currentCategoriesOrGenre';
 import useStyles from './styles';
 import { useGetGenresQuery } from '../../services/TMDB';
 import genreIcons from '../../assets/genres';
+import { addCategory } from '../../app/MovieReducer';
 
 function SideBar({ setMobileOpen }) {
   const categories = [
@@ -66,18 +67,17 @@ function SideBar({ setMobileOpen }) {
 
         )
           : (
-            data.genres.map(({ name, id }) => (
-              <Link key={name} className={classes.link} to="/Home">
+            data.genres.map(({ name, id }) => {
+              return (<Link key={name} className={classes.link} to="/Home">
                 <ListItem onClick={() => { dispatch(selectGenreOrCategory(id)); }} button>
-                  <ListItemIcon>
+                  <ListItemIcon onClick={() => { dispatch(addCategory(name.toLowerCase())) }}>
                     <img src={genreIcons[name.toLowerCase()]} className={classes.genreImage} height={30} />
                   </ListItemIcon>
                   <ListItemText primary={name} />
 
                 </ListItem>
-              </Link>
-
-            ))
+              </Link>)
+            })
           )}
       </List>
 
