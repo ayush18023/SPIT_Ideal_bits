@@ -79,11 +79,18 @@ function Welcome() {
   return (
     <div>
       <div style={{ width: "100vw", height: "100vh" }}>
-        <img src="https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png" alt=""
+        {/* <img src="https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png" alt=""
           style={{
             position: "absolute", top: "20%", left: "37%",
             zIndex: 10, width: "350px"
-          }} />
+          }} /> */}
+        <h1 style={{
+            position: "absolute", top: "10%", left: "37%",
+            zIndex: 10, width: "350px"
+            ,fontSize:"80px",color: "#dc1a28"
+          }}>
+          StreamOn
+        </h1>
         <h2 style={{
           position: "absolute", top: "40%", left: "37%", textAlign: "center",
           zIndex: 10, width: "350px"

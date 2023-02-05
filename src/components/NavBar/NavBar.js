@@ -37,7 +37,7 @@ import toast from "react-hot-toast";
 import getContract from "../../utils/getContract";
 import Toggle from "react-toggle";
 import { useWeb3React } from "@web3-react/core"
-import { addMovie } from '../../app/MovieReducer';
+import { addCategory, addMovie } from '../../app/MovieReducer';
 
 
 // import "react-toggle/style.css"; // for
@@ -460,7 +460,7 @@ function NavBar() {
                   />
 
                   <div style={{ textAlign: "center", backgroundColor: "#dc1a28", color: "white", maxWidth: "300px", padding: "10px" }} onClick={() => {
-                    handleSubmit();
+                    handleSubmit(); 
                   }}
                   >
                     Upload

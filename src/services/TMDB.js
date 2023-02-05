@@ -13,7 +13,7 @@ const data=[
     location:"mumbai",
     category:"Romance",
     eth:1.04,
-    viewable:1
+    viewable:0
   },
   {
     id:2,
