@@ -26,39 +26,39 @@ const data=[
     eth:1.26,
     viewable:0
   },
-  {
-    id:3,
-    film_name:"ADI PURUSH",
-    vote_average:4,
-    thumbnail:"https://static-koimoi.akamaized.net/wp-content/new-galleries/2020/11/adipurush002.jpg",
-    description:"asjajhvkja",
-    location:"pune",
-    category:"action",
-    eth:1.26,
-    viewable:0
-  },
-  {
-    id:4,
-    film_name:"ADI PURUSH",
-    vote_average:4,
-    thumbnail:"https://static-koimoi.akamaized.net/wp-content/new-galleries/2020/11/adipurush002.jpg",
-    description:"asjajhvkja",
-    location:"pune",
-    category:"action",
-    eth:1.26,
-    viewable:0
-  },
-  {
-    id:5,
-    film_name:"ADI PURUSH",
-    vote_average:4,
-    thumbnail:"https://static-koimoi.akamaized.net/wp-content/new-galleries/2020/11/adipurush002.jpg",
-    description:"asjajhvkja",
-    location:"pune",
-    category:"action",
-    eth:1.26,
-    viewable:0
-  }
+  // {
+  //   id:3,
+  //   film_name:"ADI PURUSH",
+  //   vote_average:4,
+  //   thumbnail:"https://static-koimoi.akamaized.net/wp-content/new-galleries/2020/11/adipurush002.jpg",
+  //   description:"asjajhvkja",
+  //   location:"pune",
+  //   category:"action",
+  //   eth:1.26,
+  //   viewable:0
+  // },
+  // {
+  //   id:4,
+  //   film_name:"ADI PURUSH",
+  //   vote_average:4,
+  //   thumbnail:"https://static-koimoi.akamaized.net/wp-content/new-galleries/2020/11/adipurush002.jpg",
+  //   description:"asjajhvkja",
+  //   location:"pune",
+  //   category:"action",
+  //   eth:1.26,
+  //   viewable:0
+  // },
+  // {
+  //   id:5,
+  //   film_name:"ADI PURUSH",
+  //   vote_average:4,
+  //   thumbnail:"https://static-koimoi.akamaized.net/wp-content/new-galleries/2020/11/adipurush002.jpg",
+  //   description:"asjajhvkja",
+  //   location:"pune",
+  //   category:"action",
+  //   eth:1.26,
+  //   viewable:0
+  // }
 ]
 
 export const fetchmovies=()=>{

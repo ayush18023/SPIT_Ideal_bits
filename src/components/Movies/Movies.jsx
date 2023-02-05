@@ -10,13 +10,15 @@ function Movies() {
   const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory);
   const lg = useMediaQuery((theme) => theme.breakpoints.only('lg'));
   const numberOfMovies = lg ? 16 : 19;
-  const [data, setdata] = useState([])
+  // const [data, setdata] = useState([])
   const dispatch=useDispatch()
   const { movies } =useSelector(state=>state.movie)
-  // const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery });
+  const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery });
 
   useEffect(()=>{
     if(movies.length===0){
+    
+      // dispatch(addMovie())
       let x = fetchmovies()
       x.forEach(obj=>{
         dispatch(addMovie(obj))
@@ -24,7 +26,7 @@ function Movies() {
     }
   },[])
 
-  const isFetching=0
+  // const isFetching=0
 
 
   // if (!data.length) {

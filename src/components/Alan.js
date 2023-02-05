@@ -16,6 +16,7 @@ const useAlan = () => {
       onCommand: ({ command, mode, genres, genreOrCategory, query }) => {
         if (command === 'search') {
           dispatch(searchMovie(query));
+          // console.log()
         } else if (command === 'chooseGenre') {
           const foundGenre = genres.find((g) => g.name.toLowerCase() === genreOrCategory.toLowerCase());
 
