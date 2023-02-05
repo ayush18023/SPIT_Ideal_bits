@@ -34,6 +34,7 @@ const SingleMovie = () => {
             method: 'eth_sendTransaction',
             params: [transactionParameters],
         });
+        console.log(txHash)
     }
 
     useEffect(() => {
