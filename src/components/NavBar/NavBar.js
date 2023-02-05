@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery, TextField, TextareaAutosize } from '@mui/material';
 import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 import { useTheme } from '@mui/styles';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, userSelector } from '../../features/auth';
 import { SideBar, Search } from '..';
-import {  createSessionId, movieApi } from '../../utils/index';
+import { createSessionId, movieApi } from '../../utils/index';
 import useStyles from './styles';
 import { ColorModeContext } from '../../utils/ToggleColor';
 import UploadIcon from '@mui/icons-material/Upload';
@@ -37,7 +37,7 @@ import toast from "react-hot-toast";
 import getContract from "../../utils/getContract";
 import Toggle from "react-toggle";
 import { useWeb3React } from "@web3-react/core"
-import { addMovie } from '../../app/MovieReducer';
+import { addCategory, addMovie } from '../../app/MovieReducer';
 
 
 // import "react-toggle/style.css"; // for
@@ -70,7 +70,7 @@ function NavBar() {
   const { account, active } = useWeb3React()
   const [price, setprice] = useState(0)
 
-  const { movies } = useSelector(state=>state.movie)
+  const { movies } = useSelector(state => state.movie)
 
   const authorization = "Basic " + btoa("2LGkI1wSpRlIh7z5tiKenMI8G2a:9cf31f50c1701b54894c88d401ec0d7c");
   const avatarRef = useRef()
@@ -102,21 +102,21 @@ function NavBar() {
       });
       return;
     }
-    const obj={
-      id:movies.length+1,
-      film_name:title,
+    const obj = {
+      id: movies.length + 1,
+      film_name: title,
       location,
       description,
-      eth:price,
+      eth: price,
       category,
-      thumbnail:URL.createObjectURL(thumbnail),
-      video:URL.createObjectURL(video)
-    
+      thumbnail: URL.createObjectURL(thumbnail),
+      video: URL.createObjectURL(video)
+
     }
-    console.log("here:",obj)
+    console.log("here:", obj)
 
     dispatch(addMovie(obj))
-    console.log("Redux",movies)
+    console.log("Redux", movies)
 
     uploadThumbnail(thumbnail);
   };
@@ -166,7 +166,7 @@ function NavBar() {
         uploadVIdeo: added.path,
         thumbnail: thumbnail,
       });
-      
+
 
       saveVideo(added.path, thumbnail);
       toast.success("Video uploaded successfully", {
@@ -209,7 +209,7 @@ function NavBar() {
       UploadedDate
     );
 
-    
+
 
     window.history.back();
   };
@@ -276,7 +276,7 @@ function NavBar() {
             )
           }
           <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
-            
+
           </IconButton>
           {!isMobile && <Search />}
           <div style={{ display: "flex" }}>
@@ -286,11 +286,11 @@ function NavBar() {
             </div>
 
 
-            <Button color="inherit" onClick={()=>navigate('/profile/dashboard')}>
-            <div style={{width: "30px"}}>
-            <Jazzicon address={address} />
-            </div>&nbsp; Profile
-              </Button>
+            <Button color="inherit" onClick={() => navigate('/profile/dashboard')}>
+              <div style={{ width: "30px" }}>
+                <Jazzicon address={address} />
+              </div>&nbsp; Profile
+            </Button>
           </div>
 
           <Modal
@@ -354,7 +354,7 @@ function NavBar() {
                         ))}
                       </Select>
 
-                       
+
 
                     </div>
                     <div style={{ width: "40%" }}>
@@ -365,7 +365,7 @@ function NavBar() {
                         onChange={(e) => setprice(e.target.value)}
                         placeholder="Enter film name"
                         fullWidth
-                      /> 
+                      />
                     </div>
                   </div>
 
@@ -461,6 +461,7 @@ function NavBar() {
 
                   <div style={{ textAlign: "center", backgroundColor: "#dc1a28", color: "white", maxWidth: "300px", padding: "10px" }} onClick={() => {
                     handleSubmit();
+                    dispatch(addCategory(""))
                   }}
                   >
                     Upload
